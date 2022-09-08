@@ -7,11 +7,8 @@ const connection = mongoose.connect(process.env.DB_URI,
     useUnifiedTopology: true
   },
   async (err) => {
-
     if (err) throw Error(err);
-
     else console.log('Connect db');
-    
   });
 
 module.exports = connection;
