@@ -10,8 +10,7 @@ import football from './images/football.jpeg'
 // import tennis from './images/tennis.jpeg'
 import tennis2 from './images/tennis2.jpeg'
 
-class Slider extends React.Component {
-  render() {
+const Slider = () => {
     return (
       <div id="slider" className="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="1000">
         <Carousel controls={false} indicators={false}>
@@ -36,6 +35,6 @@ class Slider extends React.Component {
         </Carousel>
       </div>
     )
-  };
 }
+
 export default Slider;

@@ -20,7 +20,7 @@ const Login = ({ closeModal }) => {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const { data } = await axios.post('https://c6-42-m-mern-back.vercel.app/login', input,
+    const { data } = await axios.post('http://localhost:8080/login', input,
       {
         withCredentials: true
       });
@@ -71,8 +71,8 @@ const Login = ({ closeModal }) => {
 
   return (
     <form className="mb-3" onSubmit={handleSubmit} >
-      <div class="form-group row mb-3">
-        <label id="label_contacto" class="col-3">Usuario</label>
+      <div className="form-group row mb-3">
+        <label id="label_contacto" className="col-3">Usuario</label>
         <div className="col-9" >
           <input
             type="text"
@@ -84,8 +84,8 @@ const Login = ({ closeModal }) => {
         </div>
         <div className="text-danger">{errors?.username}</div>
       </div>
-      <div class="form-group row mb-3">
-        <label id="label_contacto" class="col-3">Contraseña</label>
+      <div className="form-group row mb-3">
+        <label id="label_contacto" className="col-3">Contraseña</label>
         <div className="col-9" >
           <input
             type="password"

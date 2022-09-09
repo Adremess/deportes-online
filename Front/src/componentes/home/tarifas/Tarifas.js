@@ -18,10 +18,10 @@ class Tarifas extends React.Component {
                 <div className="card-body">
                   <h1>Futbol 5</h1>
                   <h3>Alquiler de cancha</h3>
-                  <p className="card-text"> Lunes a viernes <h5>$450</h5></p>
-                  <p className="card-text"> Sábados, domingos y feriados <h5>$500</h5></p>
+                  <h5> Lunes a viernes <p><mark>$450</mark></p></h5>
+                  <h5> Sábados, domingos y feriados <p><mark>$500</mark></p></h5>
                   <h3>Clases individuales</h3>
-                  <p className="card-text"> Lunes a viernes <h5>$600</h5></p>
+                  <h5> Lunes a viernes <p><mark>$600</mark></p></h5>
                 </div>
               </div>
             </div>
@@ -32,10 +32,10 @@ class Tarifas extends React.Component {
                 <div className="card-body">
                   <h1>Tenis</h1>
                   <h3>Alquiler de cancha</h3>
-                  <p className="card-text"> Lunes a viernes <h5>$150</h5></p>
-                  <p className="card-text"> Sábados, domingos y feriados <h5>$170</h5></p>
+                  <h5> Lunes a viernes <p><mark>$150</mark></p></h5>
+                  <h5> Sábados, domingos y feriados <p><mark>$170</mark></p></h5>
                   <h3>Clases individuales</h3>
-                  <p className="card-text"> Lunes a viernes <h5>$300</h5></p>
+                  <h5> Lunes a viernes <p><mark>$300</mark></p></h5>
                 </div>
               </div>
             </div>
@@ -46,10 +46,10 @@ class Tarifas extends React.Component {
                 <div className="card-body">
                   <h1>Padel</h1>
                   <h3>Alquiler de cancha</h3>
-                  <p className="card-text"> Lunes a viernes <h5>$130</h5></p>
-                  <p className="card-text"> Sábados, domingos y feriados <h5>$140</h5></p>
+                  <h5> Lunes a viernes <p><mark>$130</mark></p></h5>
+                  <h5> Sábados, domingos y feriados <p><mark>$140</mark></p></h5>
                   <h3>Clases individuales</h3>
-                  <p className="card-text"> Lunes a viernes <h5>$260</h5></p>
+                  <h5> Lunes a viernes <p><mark>$260</mark></p></h5>
                 </div>
               </div>
             </div>

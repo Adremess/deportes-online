@@ -10,6 +10,7 @@ const loginProcess = require("../middlewares/loginProcess");
 const registerProcess = require("../middlewares/registerProcess");
 const logoutProcess = require("../middlewares/logoutProcess");
 const processContact = require("../middlewares/processContactInfo");
+const reservationModel = require("../db/models/reservationModel");
 
 let isAuth = (req, res, next) => {
     if (req.isAuthenticated()) {
@@ -43,6 +44,19 @@ router.post('/register', passport.authenticate('register', { failureRedirect: 'e
 router.post('/reservation', processReservation);
 
 router.post('/contact', processContact);
+
+router.post('/reservation-info', isAuth, async (req, res, next) => {
+    try {
+        const reserv = await reservationModel.find({ username: req.body.username });
+        if (reserv.length === 0) {
+            res.send([]);
+        } else {
+            res.send(await reserv);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 //PUT
 

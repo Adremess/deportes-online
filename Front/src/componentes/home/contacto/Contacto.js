@@ -1,8 +1,7 @@
 import React from 'react';
 import Contact from './Formulario';
 
-class Contacto extends React.Component {
-  render() {
+const Contacto = () => {
     return (
       <>
         <div className="container">
@@ -12,13 +11,9 @@ class Contacto extends React.Component {
             </div>
           </section>
         </div>
-
         <Contact />
-
       </>
     )
-
-  }
 }
 
 export default Contacto;

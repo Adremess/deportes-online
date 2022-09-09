@@ -1,25 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import './perfil.css';
 import { SessionContext } from '../../../../context/sessionContext';
-import instance from "../../../../../Utils/axiosInstance";
+import axios from 'axios';
 
-
-
-const getReservationsInfo = async (reservationsIDs) => {
-
-  const { data } = await instance.get("/reservation", { params: reservationsIDs });
-  //Pendiente hacer uso de reservaciones en front (data);
-  console.log(data)
-}
 const Perfil = () => {
-
+  const [reservations, setReservations] = useState(null);
+  const [loading, setLoading] = useState(true);
   const { userInfo } = useContext(SessionContext);
 
-  if (userInfo.reservations !== []) {
-
-    getReservationsInfo(userInfo.reservations);
-
+  if (loading) {
+    async function getReservations() {
+      await axios.post('http://localhost:8080/reservation-info',
+        {
+          username: userInfo.username,
+        },
+        {
+          withCredentials: true
+        })
+        .then(async res => setReservations(await res.data))
+        .catch(err => console.log(err));
+    }
+    getReservations();
+    setLoading(false);
   }
+
   return (
     <>
       <div id="perfilPrincipal" className="container-fluid">
@@ -49,30 +53,30 @@ const Perfil = () => {
         <div id="perfil"><h2>Mis reservas</h2></div>
         <div id="perfil"><h3>Canchas</h3></div>
         <div id="perfil" >
-          <table id="tabla" className="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">Deporte</th>
-                <th scope="col">Club</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Hora</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="table-active">
-                <td>Padel</td>
-                <td>Pedro Bidegain</td>
-                <td>05/09/2022</td>
-                <td>18:00</td>
-              </tr>
-              <tr>
-                <td>Tenis</td>
-                <td>La Terraza</td>
-                <td>06/09/2022</td>
-                <td>15:00</td>
-              </tr>
-            </tbody>
-          </table>
+          {reservations ?
+            <table id="tabla" className="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Deporte</th>
+                  <th scope="col">Club</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Hora</th>
+                </tr>
+              </thead>
+              <tbody>
+                {reservations.map((item, key) => {
+                  return <tr key={key} class="table-active">
+                    <td>{item.sport}</td>
+                    <td>{item.court}</td>
+                    <td>{item.date}</td>
+                    <td>{item.time}</td>
+                  </tr>
+                })}
+              </tbody>
+            </table>
+            : <div class="container alert alert-info" role="alert">
+              No tiene reservas hechas!
+            </div>}
         </div>
       </div>
     </>

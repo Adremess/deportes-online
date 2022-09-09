@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: 'https://c6-42-m-mern-back.vercel.app/',
+  baseURL: 'http://localhost:8080/',
   timeout: 20000,
 });
 

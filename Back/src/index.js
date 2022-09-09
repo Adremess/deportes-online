@@ -12,7 +12,6 @@ const router = require("./routes/routes");
 const PORT = process.env.PORT || 5000;
 const app = express();
 
-
 const limiter = rateLimit({
 	windowMs: 10 * 60 * 1000,    // 10 minutes
 	max: 100                     // 100 requests per IP
