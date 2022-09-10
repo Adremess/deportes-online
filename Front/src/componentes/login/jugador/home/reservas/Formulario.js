@@ -2,9 +2,11 @@
 import 'bootswatch/dist/minty/bootstrap.min.css';
 import './reservas.css';
 import React, { useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import instance from "../../../../../Utils/axiosInstance"
 import { SessionContext } from '../../../../context/sessionContext';
+import axios from 'axios';
 
 const formatDate = ({ date }) => {
 
@@ -15,49 +17,58 @@ const formatDate = ({ date }) => {
   newDate.push(splitDate[0]);
 
   newDate = newDate.join("-");
-
+  console.log(newDate);
   return newDate;
 }
 function FormReservas() {
   const { userInfo } = useContext(SessionContext);
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const Navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
 
-      data.date = formatDate(data);
+      // data.date = formatDate(data);
 
       let day = new Date(data.date).getDay();
 
       day = day > 0 && day < 6 ? 1 : 2;
 
-      data.id = `${data.club}${data.sport}${day}`
+      // data.id = `${data.club}${data.sport}${day}`
 
-      const params = new URLSearchParams();
+      // const params = new URLSearchParams();
 
-      Object.entries(data).map(pair => {
+      // Object.entries(data).map(pair => {
 
-        return params.append(pair[0], pair[1]);
+      //   return params.append(pair[0], pair[1]);
 
-      });
+      // });
 
-      params.append("username", userInfo.username);
-
+      // params.append("username", userInfo.username);
       reset();
 
-      const response = await instance.post("/create-reservation", params);
-
+      const response = await axios.post("http://localhost:8080/create-reservation", 
+        {
+          ...data, 
+          username: userInfo.username,
+          id: `${data.club}${data.sport}${day}`
+        }, 
+        {
+          withCredentials: true
+        }
+        ).catch(err => console.log(err));
+      
       if (response.data.session) {
-
-        window.location = response.data.session;
+        console.log('response.data.session', response.data.session);
+        Navigate(`${response.data.session}`);
 
       } else if (response.data) {
-
-        window.location = response.data.url;
-
+        console.log('response.data', response.data);
+        // Navigate(`${response.data.url}`);
+        Navigate('/success', { state: data });
       } else {
 
-        window.location = "/";
+        Navigate(`/`);
       }
     } catch (err) {
       console.log(err);

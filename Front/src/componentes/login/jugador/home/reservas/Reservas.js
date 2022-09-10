@@ -4,8 +4,7 @@ import { Modal, Button } from 'react-bootstrap';
 import FormReservas from './Formulario';
 import './reservas.css';
 
-
-function Reservas() {
+const Reservas = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -24,4 +23,5 @@ function Reservas() {
     </>
   );
 }
+
 export default Reservas;

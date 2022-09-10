@@ -6,6 +6,7 @@ import axios from 'axios';
 const Perfil = () => {
   const [reservations, setReservations] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [edit, setEdit] = useState(false);
   const { userInfo } = useContext(SessionContext);
 
   if (loading) {
@@ -24,6 +25,10 @@ const Perfil = () => {
     setLoading(false);
   }
 
+  const handleSubmit = (event) => {
+    console.log(event);
+  };
+
   return (
     <>
       <div id="perfilPrincipal" className="container-fluid">
@@ -31,23 +36,48 @@ const Perfil = () => {
         <div id="perfil"><h1 className="display-3">Mi perfil</h1></div>
         <div id="perfil"><h2>Mis datos personales</h2></div>
 
+        {/* TODO: EDIT PROFILE FN*/}
+        
         <div id="perfil" >
-          <table id="tabla" className="table table-hover">
-            <tbody>
-              <tr className="table-active">
-                <th scope="row">Nombre</th>
-                <td>{userInfo.name}</td>
-              </tr>
-              <tr>
-                <th scope="row">Apellido</th>
-                <td>{userInfo.lastName}</td>
-              </tr>
-              <tr className="table-active">
-                <th scope="row">Dirección</th>
-                <td>{userInfo.address}</td>
-              </tr>
-            </tbody>
-          </table>
+          {edit ?
+            <form onSubmit={handleSubmit}>
+              <table id="tabla" className="table table-hover">
+                <tbody>
+                  <tr className="table-active">
+                    <th scope="row">Nombre</th>
+                    <td><input placeholder={userInfo.name} /></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Apellido</th>
+                    <td><input placeholder={userInfo.lastName} /></td>
+                  </tr>
+                  <tr className="table-active">
+                    <th scope="row">Dirección</th>
+                    <td><input placeholder={userInfo.address} /></td>
+                  </tr>
+                </tbody>
+              </table>
+            </form>
+            :
+            <table id="tabla" className="table table-hover">
+              <tbody>
+                <tr className="table-active">
+                  <th scope="row">Nombre</th>
+                  <td>{userInfo.name}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Apellido</th>
+                  <td>{userInfo.lastName}</td>
+                </tr>
+                <tr className="table-active">
+                  <th scope="row">Dirección</th>
+                  <td>{userInfo.address}</td>
+                </tr>
+              </tbody>
+            </table>
+          }
+
+
         </div>
 
         <div id="perfil"><h2>Mis reservas</h2></div>

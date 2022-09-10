@@ -12,6 +12,7 @@ async function processReservation(req, res, next) {
     const pricingModel = reservationPricesSchema;
     const resInfo = await pricingModel.find({ id });
     let { court, sport, price } = resInfo[0];
+    
     // Format price before including into Database.
     const formatedPrice = formatPrice(price);
     let reservation = await reservationController.create({ username, date, time, paymentMethod, sport, court, totalPrice: formatedPrice });
